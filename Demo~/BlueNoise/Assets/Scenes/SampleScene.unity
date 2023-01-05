@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   primitiveZero: {fileID: 48578489245445722, guid: 1e50ea462ff83164faf83385dbf1e052, type: 3}
   primitiveOne: {fileID: 48578489245445722, guid: e2f6104863d6af04cb778a441e942baf, type: 3}
-  probability: 0.2
+  probability: 0.1
 --- !u!4 &485255325
 Transform:
   m_ObjectHideFlags: 0

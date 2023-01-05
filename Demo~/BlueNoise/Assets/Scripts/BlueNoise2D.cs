@@ -20,31 +20,28 @@ public sealed class BlueNoise2D
         {
             for (int x = 0; x < sizeX; x++)
             {
-                var entropy = entropies[x, y];
+                var entropy = 0f;
+                if (x > 0)
+                {
+                    entropy += entropies[x - 1, y];
+                }
+                if (y > 0)
+                {
+                    entropy += entropies[x, y - 1];
+                }
+
                 var bit = Random(probability, ref entropy);
                 result[x, y] = bit;
-
-                if (x < sizeX - 1)
-                {
-                    entropies[x + 1, y] += entropy;
-                }
-                if (y < sizeY - 1)
-                {
-                    entropies[x, y + 1] += entropy;
-                }
-                if (x < sizeX - 1 && y < sizeY - 1)
-                {
-                    entropies[x + 1, y + 1] -= entropy;
-                }
+                entropies[x, y] = entropy;
             }
         }
         return result;
     }
 
-    private bool Random(float probability, ref float entropy)
+    private static bool Random(float probability, ref float entropy)
     {
         entropy += probability;
-        if (entropy > rnd.NextDouble())
+        if (entropy >= 0.5f)
         {
             entropy -= 1;
             return true;
